@@ -1,12 +1,6 @@
 ﻿using ASP.NET_PROVA.Models;
-using ASP.NET_PROVA.Models.Map;
-using NHibernate.Mapping;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Web;
 
 namespace ASP.NET_PROVA.Context
 {
@@ -18,7 +12,6 @@ namespace ASP.NET_PROVA.Context
         }
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
-        public DbSet<PlanosSaude> PlanosSaude { get; set; }
         public DbSet<Anaminese> Anaminese { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,13 +21,14 @@ namespace ASP.NET_PROVA.Context
             //Configura o formato que um decimal será criado em uma tabela 
             modelBuilder.Properties<decimal>().Configure(x => x.HasPrecision(16, 4));
             modelBuilder.Properties<decimal?>().Configure(x => x.HasPrecision(16, 4));
-            //modelBuilder.Configurations.Add(new Map.PacienteMap());
-
 
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Consulta>().HasRequired<Paciente>(p => p.Paciente).WithMany(p => p.Consultas).HasForeignKey(fk => fk.PacienteID);
-             //modelBuilder.Entity<Consulta>().HasRequired<Paciente>(p => p.paciente).WithMany(c => c.Consultas).HasForeignKey(p => p.PacienteID);
-            //modelBuilder.Entity<Paciente>().HasRequired<Paciente>(c => c.Consultas).WithMany(p => p.paciente).HasForeignKey<int>(c => c.Consultas);
+
+            // 1:n Pacientes com muitas consultas
+            modelBuilder.Entity<Consulta>().HasRequired(x => x.Paciente).WithMany(x => x.Consultas).HasForeignKey(x => x.PacienteId);// 1:n
+
+            // 1:1 consulta com umas anaminese
+            modelBuilder.Entity<Anaminese>().HasRequired(x => x.consulta).WithOptional(x => x.Anaminese).Map(m => m.MapKey("CosultaId"));// 1:1
         }
 
     }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace ASP.NET_PROVA.Models
 {
@@ -13,17 +10,21 @@ namespace ASP.NET_PROVA.Models
         [Key]
         [Required]
         public int Id { get; set; }
-        public DateTime DataConsulta { get; set; }
-        public string Procedimento { get; set; }
-        public DateTime Horario { get; set; }
-        public string Anaminese { get; set; }
 
-        public int PacienteID { get; set; }
-        [ForeignKey("PacienteID")]
-      
+        [Required]
+        public DateTime DataConsulta { get; set; }
+
+        [Required]
+        public string Procedimento { get; set; }
+
+        [Required]
+        public DateTime Horario { get; set; }
+
+        [Required]
+        public int PacienteId { get; set; }
         public virtual Paciente Paciente { get; set; }
-        
-        //[ForeignKey]
-        //public string paciente_consulta { get; set; }
+
+
+        public virtual Anaminese Anaminese { get; set; }
     }
 }

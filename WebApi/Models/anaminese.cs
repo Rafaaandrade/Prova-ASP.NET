@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ASP.NET_PROVA.Models
 {
     public class Anaminese
     {
         [Key]
+        [Required]
         public int Id { get; set; }
+
+        [Required]
         public string Sintomas { get; set; }
+
+        [Required]
         public string DoençasAnteriores { get; set; }
-        enum PartesCorpo { Cabeça, Abdomen, Membros_superiores, Membros_inferiores}
+
+        [Required]
+        public EnumPartesCorpo PartesCorpo { get; set; }
+
+
+        public virtual Consulta consulta { get; set; }
     }
 }  
