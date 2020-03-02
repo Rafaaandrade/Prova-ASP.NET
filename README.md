@@ -7,4 +7,3 @@ Permitir o sistema imprimir os agendamentos do dia (Gerar PDF)
 Listar os agendamentos do dia e de um período por plano de saúde.
 Montar o front-end.
 
-Para instalar, npm install.
