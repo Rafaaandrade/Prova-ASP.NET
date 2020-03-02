@@ -28,7 +28,9 @@ namespace ASP.NET_PROVA.Context
             modelBuilder.Entity<Consulta>().HasRequired(x => x.Paciente).WithMany(x => x.Consultas).HasForeignKey(x => x.PacienteId);// 1:n
 
             // 1:1 consulta com umas anaminese
+            
             modelBuilder.Entity<Anaminese>().HasRequired(x => x.consulta).WithOptional(x => x.Anaminese).Map(m => m.MapKey("CosultaId"));// 1:1
+            //modelBuilder.Entity<Consulta>().HasRequired(x => x.Anaminese).WithOptional(x => x.consulta).Map(m => m.MapKey("AnamineseId"));//
         }
 
     }

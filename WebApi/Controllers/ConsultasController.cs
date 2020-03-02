@@ -133,5 +133,14 @@ namespace ASP.NET_PROVA.Controllers
             }
             base.Dispose(disposing);
         }
+
+        /*public IQueryable<Consulta> GetConsultas(DateTime date)
+        {
+
+            return db.Consultas.Include(c => c.Paciente)
+                .Where(c => DbFunctions.TruncateTime(c.DataConsulta)
+                == DbFunctions.TruncateTime(date));
+
+        }*/
     }
 }
